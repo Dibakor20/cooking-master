@@ -3,17 +3,15 @@
    const inputName = document.getElementById("inputField").value;
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputName}`)
     .then(res=>res.json())
-    .then(data=>{
-       displayMeal(data)
-    })
-})
-let mealItem =""
+    .then(data=>displayMeal(data))
+    .catch(error=>errorMeal(error))
+   })
+ let mealItem =""
  displayMeal = data =>{
     // console.log(data)
     const item = data.meals;
     document.getElementById("showMeal").innerHTML=""
     mealItem=""
-    
     item.forEach(element => {
         // console.log(element)
         const showMeal = document.getElementById("showMeal");
@@ -60,4 +58,9 @@ let mealItem =""
         `
         details.innerHTML = detailsInfo;
     
+     } 
+     
+     errorMeal = errorItem=>{
+       result= document.getElementById("showSearch");
+       result.innerHTML=`<h3>There is no item,please input a correct name </h3>`
      } 
